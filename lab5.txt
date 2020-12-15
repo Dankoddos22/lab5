@@ -1,0 +1,6 @@
+aws sns create-topic --name lab5
+  381  aws sns subscribe --topic-arn arn:aws:sns:us-east-2:070071391564:lab5 --protocol email --notification-endpoint andriykoval.2720@gmail.com
+  382  aws sns subscribe --topic-arn arn:aws:sns:eu-central-1:198118129168:lab5 --protocol email --notification-endpoint danko181205@gmail.com
+  383  aws cloudwatch put-metric-alarm --alarm-name elb-tg-notification --namespace AWS/ApplicationELB --metric-name HealthyHostCount --statistic Average --period 300 --threshold 2 --comparison-operator LessThanThreshold --dimensions "Name=LoadBalancer,Value=app/Lab4/124b9cdf4693343d" "Name=TargetGroup,Value=targetgroup/Lab4/c34098c4392278fc" --evaluation-periods 1 --alarm-actions arn:aws:sns:eu-central-1:198118129168:lab5
+  384  aws elbv2 deregister-targets --target-group-arn arn:aws:elasticloadbalancing:eu-central-1:198118129168:targetgroup/Lab4/c34098c4392278fc --targets Id=i-0625bded5788f9be8
+  
